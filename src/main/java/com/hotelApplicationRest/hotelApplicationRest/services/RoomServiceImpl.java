@@ -9,7 +9,6 @@ import com.hotelApplicationRest.hotelApplicationRest.entities.Room;
 
 @Service
 public class RoomServiceImpl implements RoomService{
-//	List<Course> list;
 	@Autowired
 	private RoomDao roomDao;
 	
@@ -42,6 +41,23 @@ public class RoomServiceImpl implements RoomService{
 		for(Room room : rooms) {
 			this.roomDao.save(room);
 		}
+	}
+
+	@Override
+	public Boolean isRoomAvailable(String roomNo) {
+		List<Room> rooms = this.roomDao.findByAvailableTrue();
+		
+		for(Room room : rooms) {
+			if(room.getRoom_no().equalsIgnoreCase(roomNo))
+				return true;
+		}
+		
+		return false;
+	}
+
+	@Override
+	public Room getRoom(String roomNum) {
+		return this.roomDao.getOne(roomNum);
 	}
 
 }

@@ -1,9 +1,12 @@
 package com.hotelApplicationRest.hotelApplicationRest.entities;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 
 @Entity
 public class Room {
@@ -15,15 +18,15 @@ public class Room {
 	@Column()
 	private double price;
 	@Column()
-	private boolean available = false;
+	private boolean available = true;
+	@Column()
+	private String userName;
 	
+
+	@JoinColumn(name="booking_date")
+	@ManyToOne(cascade = {CascadeType.ALL})
+	private Date date; // One room can have only 1 date
 	
-	public Room(String roomNo, double price, boolean available) {
-		super();
-		this.room_no = roomNo;
-		this.price = price;
-		this.available = available;
-	}
 
 
 	public Room() {
@@ -32,14 +35,26 @@ public class Room {
 	}
 
 
-	public String getRoomNo() {
+
+	public String getRoom_no() {
 		return room_no;
 	}
 
 
-	public void setRoomNo(String roomNo) {
-		room_no = roomNo;
+	public void setRoom_no(String room_no) {
+		this.room_no = room_no;
 	}
+
+
+	public String getUserName() {
+		return userName;
+	}
+
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
 
 
 	public double getPrice() {
@@ -60,6 +75,17 @@ public class Room {
 	public void setAvailable(boolean available) {
 		this.available = available;
 	}
+
+
+	public Date getDate() {
+		return date;
+	}
+
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+	
 	
 	
 

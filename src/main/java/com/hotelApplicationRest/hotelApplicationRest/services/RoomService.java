@@ -9,4 +9,6 @@ public interface RoomService {
 	public void addRooms(List<Room> rooms);
 	public void removeRoom(String roomNo);
 	public void updateRooms(List<Room> rooms);
+	public Boolean isRoomAvailable(String roomNo);
+	public Room getRoom(String roomNum);
 }
